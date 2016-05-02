@@ -15,6 +15,10 @@ import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
 
+    static {
+        System.loadLibrary("iconv");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             WebSettings webSettings = webView.getSettings();
             webSettings.setJavaScriptEnabled(true);
 
-        FloatingActionButton scannerButton = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton scannerButton = (FloatingActionButton) findViewById(R.id.scannerButton);
         scannerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
