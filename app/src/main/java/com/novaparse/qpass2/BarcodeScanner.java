@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Image;
@@ -56,7 +57,7 @@ public class BarcodeScanner extends AppCompatActivity {
         scanner.setConfig(0, Config.X_DENSITY, 3);
         scanner.setConfig(0, Config.Y_DENSITY, 3);
 
-        mPreview = new CameraPreview(BarcodeScanner.this, mCamera, previewCb, autoFocusCB);
+        mPreview = new CameraPreview(BarcodeScanner.this, mCamera, previewCb);
         FrameLayout preview = (FrameLayout) findViewById(R.id.cameraPreview);
         preview.addView(mPreview);
 
@@ -137,8 +138,8 @@ public class BarcodeScanner extends AppCompatActivity {
 
                     showAlertDialog(scanResult);
 
-                  /*  Toast.makeText(BarcodeScanner.this, scanResult,
-                            Toast.LENGTH_SHORT).show();*/
+                  Toast.makeText(BarcodeScanner.this, scanResult,
+                            Toast.LENGTH_SHORT).show();
 
                     barcodeScanned = true;
 
