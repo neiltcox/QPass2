@@ -65,13 +65,13 @@ public class BarcodeScanner extends AppCompatActivity {
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (barcodeScanned) {
+                //if (barcodeScanned) {
                     barcodeScanned = false;
                     mCamera.setPreviewCallback(previewCb);
                     mCamera.startPreview();
                     previewing = true;
                     mCamera.autoFocus(autoFocusCB);
-                }
+                //}
             }
         });
     }
