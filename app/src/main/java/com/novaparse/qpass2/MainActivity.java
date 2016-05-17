@@ -3,7 +3,6 @@ package com.novaparse.qpass2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,8 +11,23 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    static String insertURL = "http://sabreok.com/projects/code/qpass/process/checkin.php";
+    static String demo_user_id = "3";
+    static String external_app_secret = "44nicememe44";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +54,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    public static void send(final String checkin_secret) {
+        StringRequest request = new StringRequest(Request.Method.POST, insertURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError{
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("demo_user_id", demo_user_id);
+                parameters.put("external_app_secret", external_app_secret);
+                parameters.put("finalMsg", checkin_secret);
+
+                return parameters;
+            }
+        };
         }
-
-        return super.onOptionsItemSelected(item);
     }
-}

@@ -33,6 +33,7 @@ public class BarcodeScanner extends AppCompatActivity {
 
     private boolean barcodeScanned = false;
     private boolean previewing = true;
+    public String finalMessage;
 
     static {
         System.loadLibrary("iconv");
@@ -135,6 +136,9 @@ public class BarcodeScanner extends AppCompatActivity {
                     Log.i("<<<<<<Asset Code>>>>> ",
                             "<<<<Bar Code>>> " + sym.getData());
                     String scanResult = sym.getData().trim();
+                    finalMessage = scanResult;
+
+                    MainActivity.send(finalMessage);
 
                     showAlertDialog(scanResult);
 
