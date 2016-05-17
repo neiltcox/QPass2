@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void send(String checkin_secret) {
-        String[] params = {"44nicememe44", checkin_secret, "3", ""};
+        String[] params = {"checkin_secret", checkin_secret, "external_app_secret", "44nicememe44", "demo_user_id","3"};
         try {
             prmja_com.Post("http://sabreok.com/projects/code/qpass/process/checkin.php", params);
         } catch (ExecutionException e) {
