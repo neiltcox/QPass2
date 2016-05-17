@@ -13,15 +13,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
+import com.prmja.http.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("http://sabreok.com/projects/code/qpass/checkin.php");
         //Javascript Enable
-            WebSettings webSettings = webView.getSettings();
-            webSettings.setJavaScriptEnabled(true);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
         FloatingActionButton scannerButton = (FloatingActionButton) findViewById(R.id.scannerButton);
         scannerButton.setOnClickListener(new View.OnClickListener() {
@@ -54,27 +52,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public static void send(final String checkin_secret) {
-        StringRequest request = new StringRequest(Request.Method.POST, insertURL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError{
-                Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("demo_user_id", demo_user_id);
-                parameters.put("external_app_secret", external_app_secret);
-                parameters.put("finalMsg", checkin_secret);
-
-                return parameters;
-            }
-        };
+    public static void send(String checkin_secret) {
+        String[] params = {"44nicememe44", checkin_secret, "3", ""};
+        try {
+            prmja_com.Post("http://sabreok.com/projects/code/qpass/process/checkin.php", params);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
+}
