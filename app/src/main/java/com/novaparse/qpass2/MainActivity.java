@@ -37,12 +37,13 @@ public class MainActivity extends AppCompatActivity {
         //Webview
         WebView webView = (WebView) findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("http://sabreok.com/projects/code/qpass/checkin.php");
+        webView.loadUrl("http://sabreok.com/projects/code/qpass/index.php");
         //Javascript Enable
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
         FloatingActionButton scannerButton = (FloatingActionButton) findViewById(R.id.scannerButton);
+        scannerButton.setImageResource(R.drawable.qpass_icon);
         scannerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
