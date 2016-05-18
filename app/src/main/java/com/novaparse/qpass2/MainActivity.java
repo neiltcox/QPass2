@@ -23,10 +23,6 @@ import com.prmja.http.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    static String insertURL = "http://sabreok.com/projects/code/qpass/process/checkin.php";
-    static String demo_user_id = "3";
-    static String external_app_secret = "44nicememe44";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
