@@ -140,7 +140,7 @@ public class BarcodeScanner extends AppCompatActivity {
 
                     MainActivity.send(finalMessage);
 
-                    showAlertDialog(scanResult);
+                    //showAlertDialog(scanResult);
 
                   Toast.makeText(BarcodeScanner.this, scanResult,
                             Toast.LENGTH_SHORT).show();
